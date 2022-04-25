@@ -32,7 +32,7 @@ def get_chart(data):
         .mark_rule()
         .encode(
             x=alt.X("dt_create", axis=alt.Axis(values=xticks, labelAngle=0)),
-            y=alt.X("count_photos", title="Количество фото"),
+            y=alt.X("count_photos", title="Количество фото", scale=alt.Scale(domain=[1000, 1700])),
             opacity=alt.condition(hover, alt.value(0.3), alt.value(0)),
             tooltip=[
                 alt.Tooltip("dt_create", title="Дата"),
@@ -63,7 +63,7 @@ def get_line_chart(data, axisX, axisY, titles, chart_name):
             x=alt.X(
                 axisX, title=titles[0], axis=alt.Axis(values=xticks, labelAngle=0)
             ),
-            y=alt.X(axisY, title=titles[1]),
+            y=alt.X(axisY, title=titles[1], scale=alt.Scale(domain=[1000, 1700])),
         )
     )
 
@@ -76,7 +76,7 @@ def get_line_chart(data, axisX, axisY, titles, chart_name):
         .mark_rule()
         .encode(
             x=alt.X(axisX, axis=alt.Axis(values=xticks, labelAngle=0)),
-            y=axisY,
+            y=alt.X(axisY, scale=alt.Scale(domain=[1000, 1700])),
             opacity=alt.condition(hover, alt.value(0.3), alt.value(0)),
             tooltip=[
                 alt.Tooltip(axisX, title=titles[0]),
