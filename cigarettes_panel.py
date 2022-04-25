@@ -18,7 +18,8 @@ import streamlit as st
 
 
 im = Image.open("./img/logo-bristol.png")
-st.set_page_config(page_title="БРИСТОЛЬ - Сигареты", layout="wide", page_icon=im)
+st.set_page_config(page_title="БРИСТОЛЬ - Сигареты",
+                   layout="wide", page_icon=im)
 
 
 def space(num_lines=1):
@@ -133,10 +134,14 @@ st.dataframe(
 )
 
 total_stats = alt.Chart(pivot_days).mark_line().encode(
-    x='dt_create',
-    y=['count_cv_full_rec:Q', "count_mon_full_rec:Q", "count_full_intersection:Q"],
-    # tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
-)
+    x=alt.X('dt_create'),
+    y=alt.Y(
+        alt.repeat("layer")
+    ),
+    color=alt.datum(alt.repeat("layer")),).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
+
+# y=['count_cv_full_rec:Q', "count_mon_full_rec:Q", "count_full_intersection:Q"],
+# tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
 
 st.altair_chart(total_stats, use_container_width=True)
 
@@ -209,7 +214,8 @@ pivot_sn_day = pivot_sn_day[
     ]
 ]
 pivot_sn_day["recognition"] = pivot_sn_day["recognition"].round(decimals=2)
-pivot_sn_day["count_cv_full_rec"] = pivot_sn_day["count_cv_full_rec"].round(decimals=2)
+pivot_sn_day["count_cv_full_rec"] = pivot_sn_day["count_cv_full_rec"].round(
+    decimals=2)
 pivot_sn_day["count_mon_full_rec"] = pivot_sn_day["count_mon_full_rec"].round(
     decimals=2
 )
@@ -239,26 +245,32 @@ space(1)
 
 diff_count_mons = round(
     (
-        in_monita[in_monita.dt_create == choise_date.strftime("%m-%d")].shape[0]
+        in_monita[in_monita.dt_create ==
+                  choise_date.strftime("%m-%d")].shape[0]
         - in_monita[
-            in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+            in_monita.dt_create == (
+                choise_date - timedelta(days=7)).strftime("%m-%d")
         ].shape[0]
     )
     / in_monita[
-        in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+        in_monita.dt_create == (
+            choise_date - timedelta(days=7)).strftime("%m-%d")
     ].shape[0]
     * 100,
     2,
 )
 diff_count_photo = round(
     (
-        in_monita[in_monita.dt_create == choise_date.strftime("%m-%d")]["url"].nunique()
+        in_monita[in_monita.dt_create ==
+                  choise_date.strftime("%m-%d")]["url"].nunique()
         - in_monita[
-            in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+            in_monita.dt_create == (
+                choise_date - timedelta(days=7)).strftime("%m-%d")
         ]["url"].nunique()
     )
     / in_monita[
-        in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+        in_monita.dt_create == (
+            choise_date - timedelta(days=7)).strftime("%m-%d")
     ]["url"].nunique()
     * 100,
     2,
@@ -287,7 +299,8 @@ diff_recognition = round(
             ].is_manual.sum()
         )
         / in_monita[
-            in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+            in_monita.dt_create == (
+                choise_date - timedelta(days=7)).strftime("%m-%d")
         ].count_mon_full_rec.sum()
     )
     * 100,
@@ -304,7 +317,8 @@ col1.metric(
 )
 col2.metric(
     f"Количество фото",
-    in_monita[in_monita.dt_create == choise_date.strftime("%m-%d")].url.nunique(),
+    in_monita[in_monita.dt_create ==
+              choise_date.strftime("%m-%d")].url.nunique(),
     f"{diff_count_photo}%",
 )
 col3.metric(
@@ -396,7 +410,7 @@ col_one_sn.table(
             "count_mon_full_rec": "{:.2f}",
             "count_cv_full_rec": "{:.2f}",
             "count_full_intersection": "{:.2f}",
-            "recognition": "{:.2f}",            
+            "recognition": "{:.2f}",
         }
     )
 )
@@ -428,7 +442,8 @@ not_monita_diff_count_photo = round(
         ]["url"].nunique()
     )
     / not_in_monita[
-        not_in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+        not_in_monita.dt_create == (
+            choise_date - timedelta(days=7)).strftime("%m-%d")
     ]["url"].nunique()
     * 100,
     2,
@@ -479,7 +494,8 @@ not_monita_diff_full_rec = round(
 col4, col5, col6 = st.columns([1, 1, 1])
 col4.metric(
     f"Количество фото",
-    not_in_monita[not_in_monita.dt_create == choise_date.strftime("%m-%d")].shape[0],
+    not_in_monita[not_in_monita.dt_create ==
+                  choise_date.strftime("%m-%d")].shape[0],
     f"{not_monita_diff_count_photo}%",
     delta_color="inverse",
 )
