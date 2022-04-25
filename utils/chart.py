@@ -115,10 +115,20 @@ def get_counts_sku(data, axisX, axisY, titles, chart_name):
             color=alt.datum(alt.repeat("layer")),).repeat(layer=axisY)
     )
 
+    base = lines.transform_filter(hover)
+
+    base = alt.layer(
+        lines.add_selection(hover),
+        base.mark_circle(size=65),
+        base.mark_circle(size=65),
+        base.mark_circle(size=65),
+        data=data
+    )
+
     # Draw points on the line, and highlight based on selection
-    points1 = lines[0].transform_filter(hover).mark_circle(size=65)
-    points2 = lines[1].transform_filter(hover).mark_circle(size=65)
-    points3 = lines[2].transform_filter(hover).mark_circle(size=65)
+    # points1 = lines[0].transform_filter(hover).mark_circle(size=65)
+    # points2 = lines[1].transform_filter(hover).mark_circle(size=65)
+    # points3 = lines[2].transform_filter(hover).mark_circle(size=65)
 
     # Draw a rule at the location of the selection
     tooltips = (
@@ -137,6 +147,4 @@ def get_counts_sku(data, axisX, axisY, titles, chart_name):
         .add_selection(hover)
     )
 
-    print(lines)
-    print(points1)
-    return (lines + points1 + points2 + points3 + tooltips).interactive()
+    return (lines + base + tooltips).interactive()
