@@ -134,16 +134,11 @@ st.dataframe(
 
 total_stats = alt.Chart(pivot_days).mark_line().encode(
     x='dt_create',
-    y='count_cv_full_rec',
-    tooltip=['dt_create', 'count_cv_full_rec']
+    y=['count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"],
+    tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
 )
 
 st.altair_chart(total_stats, use_container_width=True)
-
-df = pd.DataFrame(np.random.randn(100, 3),columns=['a', 'b', 'c'])
-chart_data = alt.Chart(df).mark_circle().encode(x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
-st.altair_chart(chart_data, use_container_width=True)
-
 
 # DATE REF ELEMENTS
 
