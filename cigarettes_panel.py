@@ -163,7 +163,7 @@ st.altair_chart(
 
 
 
-st.altair_chart(total_stats, use_container_width=True)
+# st.altair_chart(total_stats, use_container_width=True)
 
 # DATE REF ELEMENTS
 
