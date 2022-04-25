@@ -134,7 +134,7 @@ st.dataframe(
 
 total_stats = alt.Chart(pivot_days).mark_line().encode(
     x='dt_create',
-    y=['count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"],
+    y=['count_cv_full_rec:Q', "count_mon_full_rec:Q", "count_full_intersection:Q"],
     tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
 )
 
