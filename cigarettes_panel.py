@@ -141,10 +141,11 @@ total_stats = alt.Chart(pivot_days).mark_line().encode(
     x=alt.X('dt_create', title="Дата", axis=alt.Axis(
         values=dates, labelAngle=0, labelFlushOffset=2000)),
     y=alt.Y(
-        alt.repeat("layer")
+        alt.repeat("layer"),
+        scale=alt.Scale(reverse=False)
     ),
     color=alt.datum(alt.repeat("layer")),
-).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
+).repeat(layer=["count_cv_full_rec:Q", "count_mon_full_rec:Q", "count_full_intersection:Q"])
 
 # y=['count_cv_full_rec:Q', "count_mon_full_rec:Q", "count_full_intersection:Q"],
 # tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
