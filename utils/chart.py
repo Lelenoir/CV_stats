@@ -19,7 +19,7 @@ def get_chart(data):
             x=alt.X(
                 "dt_create", title="Дата", axis=alt.Axis(values=xticks, labelAngle=0, labelFlushOffset=2000)
             ),
-            y=alt.X("count_photos", title="Количество фото", rangeMin=1000, rangeMax=1800),
+            y=alt.X("count_photos", title="Количество фото", scale=alt.Scale(domain=[1000, 1800]),),
         )
     )
 
@@ -32,7 +32,7 @@ def get_chart(data):
         .mark_rule()
         .encode(
             x=alt.X("dt_create", axis=alt.Axis(values=xticks, labelAngle=0)),
-            y=alt.X("count_photos", title="Количество фото", rangeMin=1000, rangeMax=1800),
+            y=alt.X("count_photos", title="Количество фото"),
             opacity=alt.condition(hover, alt.value(0.3), alt.value(0)),
             tooltip=[
                 alt.Tooltip("dt_create", title="Дата"),
