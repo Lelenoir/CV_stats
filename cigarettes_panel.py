@@ -118,7 +118,7 @@ st.title("Аналитика сигарет за март-апрель")
 space(1)
 
 
-st.subheader("Общая статистика")
+st.header("Общая статистика")
 
 
 st.dataframe(
@@ -135,7 +135,7 @@ st.dataframe(
 total_stats = alt.Chart(pivot_days).mark_line().encode(
     x='dt_create',
     y=['count_cv_full_rec:Q', "count_mon_full_rec:Q", "count_full_intersection:Q"],
-    tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
+    # tooltip=['dt_create', 'count_cv_full_rec', "count_mon_full_rec", "count_full_intersection"]
 )
 
 st.altair_chart(total_stats, use_container_width=True)
