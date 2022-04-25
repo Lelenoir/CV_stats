@@ -137,4 +137,6 @@ def get_counts_sku(data, axisX, axisY, titles, chart_name):
         .add_selection(hover)
     )
 
+    print(lines)
+    print(points1)
     return (lines + points1 + points2 + points3 + tooltips).interactive()
