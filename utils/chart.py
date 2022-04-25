@@ -19,7 +19,7 @@ def get_chart(data):
             x=alt.X(
                 "dt_create", title="Дата", axis=alt.Axis(values=xticks, labelAngle=0, labelFlushOffset=2000)
             ),
-            y=alt.X("count_photos", title="Количество фото", scale=alt.Scale(domain=[1000, 1800]),),
+            y=alt.X("count_photos", title="Количество фото", scale=alt.Scale(domain=[1000, 1700]),),
         )
     )
 
