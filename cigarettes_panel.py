@@ -142,7 +142,7 @@ total_stats = alt.Chart(pivot_days).mark_line().encode(
         values=dates, labelAngle=0, labelFlushOffset=2000)),
     y=alt.Y(
         alt.repeat("layer"),
-        scale=alt.Scale(reverse=False)
+        scale=alt.Scale(reverse=True)
     ),
     color=alt.datum(alt.repeat("layer")),
 ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
