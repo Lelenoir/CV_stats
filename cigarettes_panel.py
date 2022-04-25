@@ -142,7 +142,7 @@ total_stats = alt.Chart(pivot_days).mark_line().encode(
         values=dates, labelAngle=0)),
     y=alt.Y(
         alt.repeat("layer"),
-        scale=alt.Scale(reverse=True),
+        scale=alt.Scale(reverse=True, round=True),
         # round=True
     ),
     color=alt.datum(alt.repeat("layer")),
