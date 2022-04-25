@@ -139,11 +139,10 @@ dates = df.dt_create.unique().tolist()
 
 total_stats = alt.Chart(pivot_days).mark_line().encode(
     x=alt.X('dt_create', title="Дата", axis=alt.Axis(
-        values=dates, labelAngle=0,
-        scale=alt.Scale(domain=(5, 20)))),
+        values=dates, labelAngle=0)),
     y=alt.Y(
         alt.repeat("layer"),
-        scale=alt.Scale(reverse=True),
+        scale=alt.Scale(domain=(5, 20), reverse=True),
         # round=True
     ),
     color=alt.datum(alt.repeat("layer")),
