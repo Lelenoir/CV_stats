@@ -403,11 +403,10 @@ space(1)
 
 
 col_multi, col_em = st.columns([2, 3])
-
 selected_sn = col_multi.selectbox(
     "Выберите конкурента",
     options=pivot_sn_day.shop_network_name.unique().tolist(),
-    index=0,
+    # index=0,
 )
 
 col_em.write("")
