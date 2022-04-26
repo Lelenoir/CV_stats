@@ -153,7 +153,7 @@ total_stats = alt.Chart(pivot_days).mark_line().encode(
     color=alt.datum(alt.repeat("layer")),
 ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
 
-st.altair_chart(total_stats, use_container_width=True)
+st.altair_chart(total_stats.interactive(), use_container_width=True)
 
 
 
