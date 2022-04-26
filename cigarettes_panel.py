@@ -161,8 +161,8 @@ dates = df.dt_create.unique().tolist()
 #     use_container_width=True,
 # )
 
-c = alt.Chart(df).mark_circle().encode(
-     x='dt_create', y='count_cv_full_rec', size='c', color='c', tooltip=['dt_createa', 'count_cv_full_rec', 'c'])
+c = alt.Chart(in_monita).mark_circle().encode(
+     x='dt_create', y='count_cv_full_rec', size='c', color='c', tooltip=['dt_create', 'count_cv_full_rec', 'c'])
 
 st.altair_chart(c, use_container_width=True)
 
