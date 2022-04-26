@@ -404,22 +404,29 @@ space(1)
 
 col_multi, col_em = st.columns([2, 3])
 
-if 'my_selectbox' not in st.session_state:
-    st.session_state['my_selectbox'] = 0
+# if 'my_selectbox' not in st.session_state:
+#     st.session_state['my_selectbox'] = 0
+#     selected_sn = col_multi.selectbox(
+#         "Выберите конкурента",
+#         options=pivot_sn_day.shop_network_name.unique().tolist(),
+#         index=st.session_state.my_selectbox,
+#         key='my_selectbox'
+#     )
+# else:
+#     st.session_state['my_selectbox'] = selected_sn
+#     selected_sn = col_multi.selectbox(
+#         "Выберите конкурента",
+#         options=pivot_sn_day.shop_network_name.unique().tolist(),
+#         index=st.session_state.my_selectbox,
+#         key='my_selectbox'
+#     )
+
     selected_sn = col_multi.selectbox(
-        "Выберите конкурента",
-        options=pivot_sn_day.shop_network_name.unique().tolist(),
-        index=st.session_state.my_selectbox,
-        key='my_selectbox'
-    )
-else:
-    st.session_state['my_selectbox'] = selected_sn
-    selected_sn = col_multi.selectbox(
-        "Выберите конкурента",
-        options=pivot_sn_day.shop_network_name.unique().tolist(),
-        index=st.session_state.my_selectbox,
-        key='my_selectbox'
-    )
+    "Выберите конкурента",
+    options=pivot_sn_day.shop_network_name.unique().tolist(),
+    index=0,
+    key='my_selectbox'
+)
 
 
 st.session_state.my_selectbox = selected_sn
