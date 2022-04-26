@@ -143,14 +143,19 @@ st.dataframe(
 dates = df.dt_create.unique().tolist()
 
 col_count_by_url, col_count_mons = st.columns([1,1])
+
 fig = px.line(pivot_days.sort_values(by='dt_create'),
              x=pivot_days.dt_create.unique().tolist(), 
              y=['count_cv_full_rec', "count_mon_full_rec", 'count_full_intersection'], 
              title='',
-             width=800, height=400)
-fig.update_xaxes(type='category', fixedrange=False, showspikes=True)
+             labels=None,
+             width=800, 
+             height=400)
+
+fig.update_yaxes(visible=True, showticklabels=True, title = '')
+fig.update_xaxes(type='category', fixedrange=False, showspikes=True, showticklabels=True, title = '')
 fig.update_traces(mode="markers+lines", hovertemplate=None)
-fig.update_layout(hovermode="x unified")
+fig.update_layout(hovermode="x unified", margin=dict(l=0, r=20, t=20, b=0))
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
