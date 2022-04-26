@@ -86,7 +86,7 @@ pivot_not_deleted = in_monita.pivot_table(
 
 pivot_days = (
     in_monita.pivot_table(
-        index="dt_create",
+        index="date",
         values=[
             "url",
             "count_mons",
