@@ -441,7 +441,7 @@ a = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
 
 b = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
-     x='count_full_intersection', y='is_manual', tooltip=['count_full_intersection', 'is_manual'])
+     x='is_manual', y='count_mon_full_rec', tooltip=['is_manualad', 'count_mon_full_rec'])
 
 c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
