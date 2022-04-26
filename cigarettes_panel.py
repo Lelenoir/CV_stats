@@ -167,7 +167,7 @@ chart_ = alt.Chart(pivot_days).mark_line().encode(
   alt.X('dt_create', title="Дата", axis=alt.Axis(values=dates, labelAngle=0)),
   alt.Y('average(count_cv_full_rec):Q'),
   alt.Y2('average(count_mon_full_rec):Q'),
-  alt.Y3('average(count_full_intersection):Q')
+#   alt.Y3('average(count_full_intersection):Q')
 )
 
 st.altair_chart(chart_, use_container_width=True)
