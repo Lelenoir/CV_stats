@@ -435,6 +435,14 @@ col_one_sn.table(
 
 col_share.write("")
 
+
+in_monita = in_monita.fillna(0)
+in_monita['count_mon_full_rec'] = in_monita['count_mon_full_rec'].astype('int64')
+in_monita['count_cv_full_rec'] = in_monita['count_cv_full_rec'].astype('int64')
+in_monita['count_full_intersection'] = in_monita['count_full_intersection'].astype('int64')
+in_monita['recognition'] = in_monita['recognition'].astype('int64')
+
+
 a = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
      x='count_cv_full_rec', y='count_mon_full_rec', tooltip=['count_cv_full_rec', 'count_mon_full_rec'])
