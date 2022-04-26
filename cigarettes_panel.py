@@ -161,10 +161,7 @@ dates = df.dt_create.unique().tolist()
 #     use_container_width=True,
 # )
 
-c = alt.Chart(in_monita).mark_circle().encode(
-     x='dt_create', y='count_mon_full_rec', size='shop_network_name', color='shop_network_name', tooltip=['dt_create', 'count_mon_full_rec', 'shop_network_name'])
 
-st.altair_chart(c, use_container_width=True)
 
 # st.altair_chart(total_stats, use_container_width=True)
 
@@ -435,6 +432,12 @@ col_one_sn.table(
 )
 
 col_share.write("")
+
+c = alt.Chart(pivot_sn_day[pivot_sn_day.shop_network_name == selected_sn]).mark_circle().encode(
+     x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
+
+st.altair_chart(c, use_container_width=True)
+
 
 form = st.form(key="Filtration by shop_network")
 
