@@ -16,7 +16,6 @@ import numpy as np
 from utils import chart
 
 from PIL import Image
-import streamlit as st
 
 
 im = Image.open("./img/logo-bristol.png")
@@ -43,8 +42,8 @@ df = pd.DataFrame()
 for i in sorted(os.listdir("./files/")):
     df = df.append(pd.read_csv(f"./files/{i}"), ignore_index=True)
 
-df["dt_create"] = pd.to_datetime(df["dt_create"], format="%Y-%m-%d")
-df["dt_create"] = df["dt_create"].apply(lambda x: x.strftime("%m-%d"))
+df["date"] = pd.to_datetime(df["dt_create"], format="%Y-%m-%d")
+df["dt_create"] = df["date"].apply(lambda x: x.strftime("%m-%d"))
 df["count_mons"] = df["count_mon_full_rec"].copy()
 
 
@@ -175,7 +174,7 @@ dates = df.dt_create.unique().tolist()
 # st.altair_chart(chart_, use_container_width=True)
 
 
-fig = px.line(pivot_days, x="dt_create", y=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"], title='')
+fig = px.line(pivot_days.sort_values(by='date'), x='date', y="count_cv_full_rec", title='')
 st.plotly_chart(fig, use_container_width=True)
 
 
