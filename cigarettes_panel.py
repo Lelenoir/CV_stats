@@ -407,7 +407,7 @@ col_multi, col_em = st.columns([2, 3])
 selected_sn = col_multi.selectbox(
     "Выберите конкурента",
     options=pivot_sn_day.shop_network_name.unique().tolist(),
-    index=st.session_state.my_selectbox,
+    index=0,
     key='my_selectbox'
 )
 
