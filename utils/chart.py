@@ -117,13 +117,13 @@ def get_counts_sku(data, axisX, axisY, titles, chart_name):
 
     base = lines.transform_filter(hover)
 
-    base = alt.layer(
-        lines.add_selection(hover),
-        base.mark_circle(size=65),
-        base.mark_circle(size=65),
-        base.mark_circle(size=65),
-        data=data
-    )
+    # base = alt.layer(
+    #     lines.add_selection(hover),
+    #     base.mark_circle(size=65),
+    #     base.mark_circle(size=65),
+    #     base.mark_circle(size=65),
+    #     data=data
+    # )
 
     # base = lines.mark_circle().encode(
     #         opacity=alt.condition(hover, alt.value(1), alt.value(0))
