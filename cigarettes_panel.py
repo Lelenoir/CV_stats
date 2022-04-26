@@ -437,10 +437,15 @@ c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
      x='count_cv_full_rec', y='count_mon_full_rec', tooltip=['count_cv_full_rec', 'count_mon_full_rec'])
 
+b = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
+    #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
+     x='count_full_intersection', y='count_mon_full_rec', tooltip=['count_full_intersection', 'count_mon_full_rec'])
 
-coll, coll2 = st.columns([1,2])
+coll, coll2, coll3 = st.columns([1,1,1])
 coll.altair_chart(c, use_container_width=True)
-coll2.write("")
+coll2.altair_chart(b, use_container_width=True)
+
+coll3.write("")
 
 form = st.form(key="Filtration by shop_network")
 
