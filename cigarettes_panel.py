@@ -405,7 +405,7 @@ space(1)
 col_multi, col_em = st.columns([2, 3])
 
 if 'my_selectbox' not in st.session_state:
-    st.session_state['my_selectbox'] = 0
+    st.session_state['my_selectbox'] = int(0)
 
 selected_sn = col_multi.selectbox(
     "Выберите конкурента",
