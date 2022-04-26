@@ -56,6 +56,11 @@ pivot_deleted = pd.pivot_table(
 )
 
 in_monita = df[df["not_in_monita"] == False].copy()
+in_monita["recognition"] = (
+    (in_monita["count_mons"] - in_monita["is_manual"])
+    / in_monita["count_mons"]
+    * 100
+)
 pivot_not_deleted = in_monita.pivot_table(
     index="dt_create",
     values=[
@@ -449,7 +454,7 @@ a = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
 
 b = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
-     x='recognition', y='count_mons', tooltip=['recognition', 'count_mons'])
+     x='recognition', y='count_mon_full_rec', tooltip=['recognition', 'count_mon_full_rec'])
 
 c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
