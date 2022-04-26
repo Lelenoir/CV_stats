@@ -153,18 +153,18 @@ dates = df.dt_create.unique().tolist()
 #     color=alt.datum(alt.repeat("layer")),
 # ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
 
-# count_chart = chart.get_counts_sku(
-#     pivot_days,
-#     axisX="dt_create",
-#     axisY=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"],
-#     titles=["Дата", "Количество SKU"],
-#     chart_name="Динамика количества отданных фотографий",
-# )
+count_chart = chart.get_counts_sku(
+    pivot_days,
+    axisX="dt_create",
+    axisY=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"],
+    titles=["Дата", "Количество SKU"],
+    chart_name="Динамика количества отданных фотографий",
+)
 
-# st.altair_chart(
-#     (count_chart).interactive(),
-#     use_container_width=True,
-# )
+st.altair_chart(
+    (count_chart).interactive(),
+    use_container_width=True,
+)
 
 
 
@@ -452,10 +452,6 @@ a = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
      x='count_cv_full_rec', y='count_mon_full_rec', tooltip=['count_cv_full_rec', 'count_mon_full_rec'])
 
-b = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
-    #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
-     x='recognition', y='count_mon_full_rec', tooltip=['recognition', 'count_mon_full_rec'])
-
 c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
      x='count_full_intersection', y='count_mon_full_rec', tooltip=['count_full_intersection', 'count_mon_full_rec'])
@@ -463,7 +459,7 @@ c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
 
 coll, coll2, coll3 = st.columns([1,1,1])
 coll.altair_chart(a, use_container_width=True)
-coll2.altair_chart(b, use_container_width=True)
+coll2.altair_chart("")
 coll3.altair_chart(c, use_container_width=True)
 
 form = st.form(key="Filtration by shop_network")
