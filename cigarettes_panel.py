@@ -433,7 +433,7 @@ col_one_sn.table(
 
 col_share.write("")
 
-c = alt.Chart(pivot_sn_day[pivot_sn_day.shop_network_name == selected_sn]).mark_circle().encode(
+c = alt.Chart(df[(df.shop_network_name == selected_sn) & (df.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
      x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
 
 st.altair_chart(c, use_container_width=True)
