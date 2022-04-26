@@ -162,7 +162,7 @@ dates = df.dt_create.unique().tolist()
 # )
 
 c = alt.Chart(in_monita).mark_circle().encode(
-     x='dt_create', y='url', size='count_mon_full_rec', color='count_cv_full_rec', tooltip=['dt_create', 'count_mon_full_rec', 'count_cv_full_rec'])
+     x='dt_create', y='count_mon_full_rec', size='shop_network_name', color='shop_network_name', tooltip=['dt_create', 'count_mon_full_rec', 'shop_network_name'])
 
 st.altair_chart(c, use_container_width=True)
 
