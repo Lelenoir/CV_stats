@@ -142,33 +142,38 @@ st.dataframe(
 dates = df.dt_create.unique().tolist()
 
 
-# total_stats = alt.Chart(pivot_days).mark_line().encode(
-#     x=alt.X('dt_create', title="Дата", axis=alt.Axis(
-#         values=dates, labelAngle=0)),
-#     y=alt.Y(
-#         alt.repeat("layer"),
-#         scale=alt.Scale(reverse=True, round=True),
-#         # round=True
-#     ),
-#     color=alt.datum(alt.repeat("layer")),
-# ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
+total_stats = alt.Chart(pivot_days).mark_line().encode(
+    x=alt.X('dt_create', title="Дата", axis=alt.Axis(
+        values=dates, labelAngle=0)),
+    y=alt.Y(
+        alt.repeat("layer"),
+        scale=alt.Scale(reverse=True, round=True),
+        # round=True
+    ),
+    color=alt.datum(alt.repeat("layer")),
+).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
 
-count_chart = chart.get_counts_sku(
-    pivot_days,
-    axisX="dt_create",
-    axisY=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"],
-    titles=["Дата", "Количество SKU"],
-    chart_name="Динамика количества отданных фотографий",
-)
-
-st.altair_chart(
-    (count_chart).interactive(),
-    use_container_width=True,
-)
+st.altair_chart(total_stats, use_container_width=True)
 
 
 
-# st.altair_chart(total_stats, use_container_width=True)
+
+
+# count_chart = chart.get_counts_sku(
+#     pivot_days,
+#     axisX="dt_create",
+#     axisY=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"],
+#     titles=["Дата", "Количество SKU"],
+#     chart_name="Динамика количества отданных фотографий",
+# )
+
+# st.altair_chart(
+#     (count_chart).interactive(),
+#     use_container_width=True,
+# )
+
+
+
 
 # DATE REF ELEMENTS
 
