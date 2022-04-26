@@ -142,6 +142,9 @@ st.dataframe(
 dates = df.dt_create.unique().tolist()
 
 
+
+hover = alt.selection_single(on='mouseover', nearest=True, empty='none')
+
 total_stats = alt.Chart(pivot_days).mark_line().encode(
     x=alt.X('dt_create', title="Дата", axis=alt.Axis(
         values=dates, labelAngle=0)),
@@ -153,7 +156,13 @@ total_stats = alt.Chart(pivot_days).mark_line().encode(
     color=alt.datum(alt.repeat("layer")),
 ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
 
-st.altair_chart(total_stats.interactive(), use_container_width=True)
+points = total_stats.mark_point().add_selection(
+    hover
+)
+
+chart_ = (hover + total_stats + points).interactive()
+
+st.altair_chart(chart_, use_container_width=True)
 
 
 
