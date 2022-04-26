@@ -155,7 +155,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
 fig.update_yaxes(visible=True, showticklabels=True, title = '')
 fig.update_xaxes(type='category', fixedrange=False, showspikes=True, showticklabels=True, title = '')
 fig.update_traces(mode="markers+lines", hovertemplate=None)
-fig.update_layout(hovermode="x unified", margin=dict(l=0, r=20, t=20, b=0))
+fig.update_layout(hovermode="x unified", hoverlabel = dict(namelength = -1), margin=dict(l=0, r=20, t=20, b=0))
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
