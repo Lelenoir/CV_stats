@@ -142,41 +142,7 @@ st.dataframe(
 
 dates = df.dt_create.unique().tolist()
 
-
-
-# hover = alt.selection_single(on='mouseover', nearest=True, empty='none')
-
-# total_stats = alt.Chart(pivot_days).mark_line().encode(
-#     x=alt.X('dt_create', title="Дата", axis=alt.Axis(
-#         values=dates, labelAngle=0)),
-#     y=alt.Y(
-#         alt.repeat("layer"),
-#         scale=alt.Scale(reverse=True, round=True),
-#         # round=True
-#     ),
-#     color=alt.datum(alt.repeat("layer")),
-# ).repeat(layer=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"])
-
-# points = total_stats.mark_point().add_selection(
-#     hover
-# )
-
-# chart_ = (hover + total_stats + points).interactive()
-
-
-# chart_ = alt.Chart(pivot_days).mark_line().encode(
-#   alt.X('dt_create', title="Дата", axis=alt.Axis(values=dates, labelAngle=0)),
-#   alt.Y('average(count_cv_full_rec):Q'),
-#   alt.Y2('average(count_mon_full_rec):Q'),
-# #   alt.Y3('average(count_full_intersection):Q')
-# )
-
-# st.altair_chart(chart_, use_container_width=True)
-
-
-# fig = px.line(pivot_days.sort_values(by='date'), x='date', y="count_cv_full_rec", title='')
-# st.plotly_chart(fig, use_container_width=True)
-
+col_count_by_url, col_count_mons = st.columns([1,1])
 fig = px.line(pivot_days.sort_values(by='dt_create'),
              x=pivot_days.dt_create.unique().tolist(), 
              y=['count_cv_full_rec', "count_mon_full_rec", 'count_full_intersection'], 
@@ -185,24 +151,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
 fig.update_xaxes(type='category', fixedrange=False, showspikes=True)
 fig.update_traces(mode="markers+lines", hovertemplate=None)
 fig.update_layout(hovermode="x unified")
-st.plotly_chart(fig, use_container_width=True)
-
-
-
-# count_chart = chart.get_counts_sku(
-#     pivot_days,
-#     axisX="dt_create",
-#     axisY=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"],
-#     titles=["Дата", "Количество SKU"],
-#     chart_name="Динамика количества отданных фотографий",
-# )
-
-# st.altair_chart(
-#     (count_chart).interactive(),
-#     use_container_width=True,
-# )
-
-
+col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
 # DATE REF ELEMENTS
