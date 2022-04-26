@@ -8,6 +8,8 @@ import pandas as pd
 import streamlit as st
 
 import matplotlib.pyplot as plt
+import plotly.express as px
+
 import os
 import numpy as np
 
@@ -163,16 +165,18 @@ dates = df.dt_create.unique().tolist()
 # chart_ = (hover + total_stats + points).interactive()
 
 
-chart_ = alt.Chart(pivot_days).mark_line().encode(
-  alt.X('dt_create', title="Дата", axis=alt.Axis(values=dates, labelAngle=0)),
-  alt.Y('average(count_cv_full_rec):Q'),
-  alt.Y2('average(count_mon_full_rec):Q'),
-#   alt.Y3('average(count_full_intersection):Q')
-)
+# chart_ = alt.Chart(pivot_days).mark_line().encode(
+#   alt.X('dt_create', title="Дата", axis=alt.Axis(values=dates, labelAngle=0)),
+#   alt.Y('average(count_cv_full_rec):Q'),
+#   alt.Y2('average(count_mon_full_rec):Q'),
+# #   alt.Y3('average(count_full_intersection):Q')
+# )
 
-st.altair_chart(chart_, use_container_width=True)
+# st.altair_chart(chart_, use_container_width=True)
 
 
+fig = px.line(pivot_days, x="dt_create", y=["count_cv_full_rec", "count_mon_full_rec", "count_full_intersection"], title='')
+st.plotly_chart(fig, use_container_width=True)
 
 
 
