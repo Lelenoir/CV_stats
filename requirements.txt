@@ -4,4 +4,5 @@ streamlit
 matplotlib
 numpy
 autopep8
+plotly
 # os
