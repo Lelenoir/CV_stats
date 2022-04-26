@@ -485,7 +485,7 @@ c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monit
 
 coll, coll2, coll3 = st.columns([1,1,1])
 coll.altair_chart(a, use_container_width=True)
-coll2.altair_chart("")
+coll2.write("")
 coll3.altair_chart(c, use_container_width=True)
 
 form = st.form(key="Filtration by shop_network")
