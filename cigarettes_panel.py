@@ -109,7 +109,7 @@ pivot_days = (
     )
     .reset_index()
     .sort_values(by="count_mons", ascending=False)
-).reset_index(drop=True)
+).reset_index(drop=True).round(2)
 
 pivot_days["recognition"] = (
     (pivot_days["count_mons"] - pivot_days["is_manual"])
