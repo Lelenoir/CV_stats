@@ -429,7 +429,7 @@ selected_sn = col_multi.selectbox(
 )
 
 
-st.session_state.my_selectbox = selected_sn
+# st.session_state.my_selectbox = selected_sn
 
 col_em.write("")
 col_em.write("")
