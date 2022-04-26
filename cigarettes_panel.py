@@ -177,7 +177,8 @@ choise_date = col_slider.slider(
     min_value=datetime.strptime("2022-" + sorted(dates)[1], "%Y-%m-%d"),
     max_value=datetime.strptime("2022-" + sorted(dates)[-1], "%Y-%m-%d"),
     format="MM-DD",
-    step=timedelta(days=7),
+    step=timedelta(days=7), 
+    key='my_slider'
 )
 
 col_empty.write("")
@@ -401,13 +402,15 @@ col_empty.write("")
 
 space(1)
 
-
 col_multi, col_em = st.columns([2, 3])
 selected_sn = col_multi.selectbox(
     "Выберите конкурента",
     options=pivot_sn_day.shop_network_name.unique().tolist(),
-    # index=0,
+    index=0,
+    key='my_selectbox'
 )
+
+st.session_state.my_selectbox = selected_sn
 
 col_em.write("")
 col_em.write("")
