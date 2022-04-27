@@ -158,7 +158,7 @@ col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 col_count_mons.subheader("Количество мониторингов")
 fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=['count_mons', 'is_manual'])
-col_count_by_url.plotly_chart(fig, use_container_width=True)
+col_count_mons.plotly_chart(fig, use_container_width=True)
 
 
 col_try.subheader("Распознавание")
