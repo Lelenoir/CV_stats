@@ -144,6 +144,10 @@ dates = df.dt_create.unique().tolist()
 
 col_count_by_url, col_count_mons = st.columns([1,1])
 
+
+col_count_by_url.write("Динамика количества позиций")
+
+
 fig = px.line(pivot_days.sort_values(by='dt_create'),
               x=pivot_days.sort_values(by='dt_create').dt_create.unique().tolist(),
               y=['count_cv_full_rec', "count_mon_full_rec",
