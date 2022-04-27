@@ -208,7 +208,7 @@ fig.update_yaxes(visible=True, showticklabels=True,
                  title='', range=[0, 250000])
 fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
-fig.layout.plot_bgcolor = '#fff'
+# fig.layout.plot_bgcolor = '#fff'
 fig.update_layout(
     hovermode=None,
     hoverlabel=dict(
