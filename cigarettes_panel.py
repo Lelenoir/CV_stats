@@ -209,7 +209,7 @@ fig.update_yaxes(visible=True, showticklabels=True,
 fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_layout(
-    paper_bgcolor="white",
+    paper_bgcolor="#000000",
     hovermode=None,
     hoverlabel=dict(
         namelength=-1,
