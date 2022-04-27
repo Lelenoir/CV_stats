@@ -3,19 +3,20 @@ import pandas as pd
 
 
 
-def get_line_chart(df, x, y, data_marks="markers+lines+text"):
+def get_line_chart(df, x, y, data_marks_type="lines+text", xrange=[70, 90]):
     fig = px.line(df,
               x=x,
               y=y,
               title='',
               width=800,
-              height=400)
-    fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
+              height=400,
+              text=y)
+    fig.update_yaxes(visible=True, showticklabels=True, title='', range=xrange, showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
     fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
 
     fig.update_traces(
-    mode=data_marks, 
+    mode=data_marks_type, 
     hovertemplate=None,
     textposition='top center',
 )

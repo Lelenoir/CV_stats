@@ -247,11 +247,11 @@ fig.update_layout(
 
 
 col_count_mons.subheader("Количество мониторингов")
-
 col_count_mons.plotly_chart(fig, use_container_width=True)
 
+
 col_try.subheader("Распознавание")
-fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks="markers+lines+text")
+fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text")
 col_try.plotly_chart(fig, use_container_width=True)
 
 # DATE REF ELEMENTS
