@@ -158,7 +158,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
               width=800,
               height=400)
 
-fig.update_yaxes(visible=True, showticklabels=True, title='')
+fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='LightPink')
 fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='')
 fig.update_traces(
@@ -194,23 +194,26 @@ fig.update_layout(
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 fig = px.bar(pivot_days.sort_values(by='dt_create'),
-              x=pivot_days.sort_values(by='dt_create').dt_create.unique().tolist(),
-              y=['count_mons', 'is_manual'],
-              title='',
-              labels=None,
-              color_discrete_sequence=[px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
-              width=800,
-              height=400, text_auto=True,
-              template="plotly_white")
+             x=pivot_days.sort_values(
+                 by='dt_create').dt_create.unique().tolist(),
+             y=['count_mons', 'is_manual'],
+             title='',
+             labels=None,
+             color_discrete_sequence=[
+                 px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
+             width=800,
+             height=400, text_auto=True,
+             template="plotly_white")
 
-fig.update_yaxes(visible=True, showticklabels=True, title='', range = [0,250000])
+fig.update_yaxes(visible=True, showticklabels=True,
+                 title='', range=[0, 250000])
 fig.update_xaxes(type='category', fixedrange=False,
-                 showspikes=True, showticklabels=True, title='')
+                 showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_layout(
-    hovermode=None, 
+    hovermode=None,
     hoverlabel=dict(
         namelength=-1,
-        bordercolor="White"), 
+        bordercolor="White"),
     margin=dict(l=0, r=20, t=20, b=0),
     legend=dict(
         orientation="h",
@@ -227,10 +230,12 @@ fig.update_layout(
             size=12,
             color="black"
         ),
-    bordercolor="Black",
-    borderwidth=None
+
+        bordercolor="Black",
+        borderwidth=None
+    )
 )
-)
+
 
 col_count_mons.subheader("Количество мониторингов")
 
