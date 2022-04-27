@@ -201,7 +201,7 @@ col_count_by_url.subheader("Динамика количества позиций
 # )
 
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
-                  'count_full_intersection'], data_marks_type="markers+lines+text")
+                  'count_full_intersection'], data_marks_type="markers+lines")
 # col_try.plotly_chart(fig, use_container_width=True)
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
