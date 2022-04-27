@@ -203,7 +203,7 @@ fig = px.bar(pivot_days.sort_values(by='dt_create'),
                  px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
              width=800,
              height=400, text_auto=True,
-             template="plotly_white")
+             template="none")
 
 fig.update_yaxes(visible=True, showticklabels=True,
                  title='', range=[0, 250000])
