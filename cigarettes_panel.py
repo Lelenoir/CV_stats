@@ -224,6 +224,8 @@ fig.update_layout(
 )
 )
 
+col_count_mons.subheader("Количество мониторингов")
+
 col_count_mons.plotly_chart(fig, use_container_width=True)
 
 
