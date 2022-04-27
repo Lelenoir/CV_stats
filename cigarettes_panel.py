@@ -145,14 +145,11 @@ dates = df.dt_create.unique().tolist()
 col_count_by_url, col_count_mons = st.columns([1,1])
 
 
-col_count_by_url.write("Динамика количества позиций")
-
-
 fig = px.line(pivot_days.sort_values(by='dt_create'),
               x=pivot_days.sort_values(by='dt_create').dt_create.unique().tolist(),
               y=['count_cv_full_rec', "count_mon_full_rec",
                   'count_full_intersection'],
-              title='',
+              title='Динамика количества позиций',
               labels=None,
               color_discrete_sequence=px.colors.qualitative.Set2,
               width=800,
@@ -171,7 +168,7 @@ fig.update_layout(
     hoverlabel=dict(
         namelength=-1,
         bordercolor="White"), 
-    margin=dict(l=0, r=20, t=20, b=0),
+    margin=dict(l=0, r=20, t=40, b=0),
     legend=dict(
     title='',
     title_font_family="Verdana",
