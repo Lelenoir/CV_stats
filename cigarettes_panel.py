@@ -146,7 +146,7 @@ st.dataframe(
 
 dates = df.dt_create.unique().tolist()
 
-col_count_by_url, col_count_mons, col_try = st.columns([1,1])
+col_count_by_url, col_count_mons, col_try = st.columns([1,1,1])
 
 
 col_count_by_url.subheader("Динамика количества позиций")
