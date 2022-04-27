@@ -202,14 +202,14 @@ fig = px.bar(pivot_days.sort_values(by='dt_create'),
              color_discrete_sequence=[
                  px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
              width=800,
-             height=400, text_auto=True,
-             template="none")
+             height=400, text_auto=True)
 
 fig.update_yaxes(visible=True, showticklabels=True,
                  title='', range=[0, 250000])
 fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_layout(
+    paper_bgcolor="white",
     hovermode=None,
     hoverlabel=dict(
         namelength=-1,
