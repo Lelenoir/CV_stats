@@ -8,8 +8,7 @@ def get_line_chart(df, x, y, data_marks_type="lines+text", xrange=[70, 90]):
               x=x,
               y=y,
               title='',
-              width=800,
-              height=400,
+              height=300,
               text=y)
     fig.update_yaxes(visible=True, showticklabels=True, title='', range=xrange, showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
     fig.update_xaxes(type='category', fixedrange=False,
