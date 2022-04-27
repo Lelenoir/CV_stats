@@ -157,7 +157,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
               color_discrete_sequence=px.colors.qualitative.Set2,
               width=800,
               height=400,
-              template="plotly_white")
+              template="None")
 
 fig.update_yaxes(visible=True, showticklabels=True, title='')
 fig.update_xaxes(type='category', fixedrange=False,
