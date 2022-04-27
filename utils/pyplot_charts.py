@@ -3,7 +3,7 @@ import pandas as pd
 
 
 
-def get_line_chart(df, x, y, data_marks_type="lines+text", xrange=[70, 90]):
+def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90]):
     fig = px.line(df,
               x=x,
               y=y,
