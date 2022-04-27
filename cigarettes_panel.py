@@ -14,6 +14,7 @@ import os
 import numpy as np
 
 from utils import chart
+from utils import pyplot_charts
 
 from PIL import Image
 
@@ -109,13 +110,16 @@ pivot_days = (
     )
     .reset_index()
     .sort_values(by="count_mons", ascending=False)
-).reset_index(drop=True).round(2)
+).reset_index(drop=True)
 
 pivot_days["recognition"] = (
     (pivot_days["count_mons"] - pivot_days["is_manual"])
     / pivot_days["count_mons"]
     * 100
 )
+pivot_days = pivot_days.sort_values(by='dt_create')
+pivot_days = pivot_days.round(2)
+
 pivot_days.index += 1
 
 
@@ -142,7 +146,7 @@ st.dataframe(
 
 dates = df.dt_create.unique().tolist()
 
-col_count_by_url, col_count_mons = st.columns([1,1])
+col_count_by_url, col_count_mons, col_try = st.columns([1,1])
 
 
 col_count_by_url.subheader("Динамика количества позиций")
@@ -159,7 +163,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
 
 fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_xaxes(type='category', fixedrange=False,
-                 showspikes=True, showticklabels=True, title='')
+                 showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_traces(
     mode="markers+lines", 
     hovertemplate=None,
@@ -235,7 +239,7 @@ fig.update_layout(
             size=12,
             color="black"
         ),
-
+        opacity=10,
         bordercolor="Black",
         borderwidth=None
     )
@@ -246,7 +250,9 @@ col_count_mons.subheader("Количество мониторингов")
 
 col_count_mons.plotly_chart(fig, use_container_width=True)
 
-
+col_try.subheader("Распознавание")
+fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks="markers+lines+text")
+col_try.plotly_chart(fig, use_container_width=True)
 
 # DATE REF ELEMENTS
 
