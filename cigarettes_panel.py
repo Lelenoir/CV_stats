@@ -158,7 +158,7 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
               width=800,
               height=400)
 
-fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='LightPink')
+fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
 fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='')
 fig.update_traces(
@@ -166,7 +166,12 @@ fig.update_traces(
     hovertemplate=None,
     textposition='top center',
 )
+
+fig.layout.plot_bgcolor = 'white'
+fig.layout.paper_bgcolor = 'white'
+
 fig.update_layout(
+
     hovermode="x unified", 
     hoverlabel=dict(
         namelength=-1,
