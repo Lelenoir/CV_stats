@@ -45,5 +45,8 @@ def get_line_chart(df, x, y, data_marks_type="lines+text", xrange=[70, 90]):
     bgcolor=None,
 )
 )
+
+    fig.update(layout_showlegend=True)
+
     return fig
 
