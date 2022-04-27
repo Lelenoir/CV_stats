@@ -145,17 +145,41 @@ dates = df.dt_create.unique().tolist()
 col_count_by_url, col_count_mons = st.columns([1,1])
 
 fig = px.line(pivot_days.sort_values(by='dt_create'),
-             x=pivot_days.dt_create.unique().tolist(), 
-             y=['count_cv_full_rec', "count_mon_full_rec", 'count_full_intersection'], 
-             title='',
-             labels=None,
-             width=800, 
-             height=400)
+              x=pivot_days.dt_create.unique().tolist(),
+              y=['count_cv_full_rec', "count_mon_full_rec",
+                  'count_full_intersection'],
+              title='',
+              labels=None,
+              color_discrete_sequence=px.colors.qualitative.Set2,
+              width=800,
+              height=400)
 
-fig.update_yaxes(visible=True, showticklabels=True, title = '')
-fig.update_xaxes(type='category', fixedrange=False, showspikes=True, showticklabels=True, title = '')
-fig.update_traces(mode="markers+lines", hovertemplate=None)
-fig.update_layout(hovermode="x unified", hoverlabel = dict(namelength = -1), margin=dict(l=0, r=20, t=20, b=0))
+fig.update_yaxes(visible=True, showticklabels=True, title='')
+fig.update_xaxes(type='category', fixedrange=False,
+                 showspikes=True, showticklabels=True, title='')
+fig.update_traces(
+    mode="markers+lines", 
+    hovertemplate=None,
+    textposition='top center',
+)
+fig.update_layout(
+    hovermode="x unified", 
+    hoverlabel=dict(
+        namelength=-1,
+        bordercolor="White"), 
+    margin=dict(l=0, r=20, t=20, b=0),
+    legend=dict(
+    title='',
+    title_font_family="Verdana",
+    font=dict(
+        family="Sans-serif",
+        size=12,
+        color="black"
+        ),
+    bordercolor="Black",
+    borderwidth=None
+)
+)
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
