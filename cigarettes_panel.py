@@ -230,8 +230,6 @@ fig.update_layout(
         y=1.02,
         xanchor="left",
         x=0,
-
-
         title='',
         title_font_family="Verdana",
         font=dict(
@@ -239,7 +237,6 @@ fig.update_layout(
             size=12,
             color="black"
         ),
-        opacity=10,
         bordercolor="Black",
         borderwidth=None
     )
