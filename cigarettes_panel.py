@@ -186,6 +186,47 @@ fig.update_layout(
 )
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
+fig = px.bar(pivot_days.sort_values(by='dt_create'),
+              x=pivot_days.sort_values(by='dt_create').dt_create.unique().tolist(),
+              y=['count_mons', 'is_manual'],
+              title='',
+              labels=None,
+              color_discrete_sequence=[px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
+              width=800,
+              height=400, text_auto=True)
+
+fig.update_yaxes(visible=True, showticklabels=True, title='', range = [0,250000])
+fig.update_xaxes(type='category', fixedrange=False,
+                 showspikes=True, showticklabels=True, title='')
+fig.update_layout(
+    hovermode=None, 
+    hoverlabel=dict(
+        namelength=-1,
+        bordercolor="White"), 
+    margin=dict(l=0, r=20, t=20, b=0),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="left",
+        x=0,
+
+
+        title='',
+        title_font_family="Verdana",
+        font=dict(
+            family="Sans-serif",
+            size=12,
+            color="black"
+        ),
+    bordercolor="Black",
+    borderwidth=None
+)
+)
+
+col_count_mons.plotly_chart(fig, use_container_width=True)
+
+
 
 # DATE REF ELEMENTS
 
