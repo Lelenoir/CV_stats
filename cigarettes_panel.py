@@ -173,12 +173,19 @@ fig.update_layout(
         bordercolor="White"), 
     margin=dict(l=0, r=20, t=0, b=0),
     legend=dict(
-    title='',
-    title_font_family="Verdana",
-    font=dict(
-        family="Sans-serif",
-        size=12,
-        color="black"
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="left",
+        x=0,
+    
+        title='',
+        title_font_family="Verdana",
+        
+        font=dict(
+            family="Sans-serif",
+            size=12,
+            color="black"
         ),
     bordercolor="Black",
     borderwidth=None
