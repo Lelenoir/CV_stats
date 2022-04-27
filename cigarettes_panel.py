@@ -156,7 +156,8 @@ fig = px.line(pivot_days.sort_values(by='dt_create'),
               labels=None,
               color_discrete_sequence=px.colors.qualitative.Set2,
               width=800,
-              height=400)
+              height=400,
+              template="plotly_white")
 
 fig.update_yaxes(visible=True, showticklabels=True, title='')
 fig.update_xaxes(type='category', fixedrange=False,
@@ -200,7 +201,8 @@ fig = px.bar(pivot_days.sort_values(by='dt_create'),
               labels=None,
               color_discrete_sequence=[px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
               width=800,
-              height=400, text_auto=True)
+              height=400, text_auto=True,
+              template="plotly_white")
 
 fig.update_yaxes(visible=True, showticklabels=True, title='', range = [0,250000])
 fig.update_xaxes(type='category', fixedrange=False,
