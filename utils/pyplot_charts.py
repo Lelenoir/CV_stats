@@ -56,3 +56,47 @@ def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 9
 
     return fig
 
+
+def get_bar_chart(df, x, y):
+    fig = px.bar(df,
+             x=x,
+             y=y,
+             title='',
+             labels=None,
+             color_discrete_sequence=[
+                 px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
+             height=300, 
+             text_auto=True)
+
+    fig.update_yaxes(visible=True, showticklabels=True,
+                 title='', range=[0, 250000])
+    fig.update_xaxes(type='category', fixedrange=False,
+                    showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
+    fig.layout.plot_bgcolor = 'white'
+    fig.layout.paper_bgcolor = 'white'
+    fig.update_layout(
+        hovermode=None,
+        hoverlabel=dict(
+            namelength=-1,
+            bordercolor="White"),
+        margin=dict(l=0, r=20, t=20, b=0),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            x=0,
+            title='',
+            title_font_family="Verdana",
+            font=dict(
+                family="Sans-serif",
+                size=12,
+                color="black"
+            ),
+            bordercolor="Black",
+            borderwidth=None
+        )
+    )
+
+    return fig
+

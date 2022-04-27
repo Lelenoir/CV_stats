@@ -150,108 +150,15 @@ col_count_by_url, col_count_mons, col_try = st.columns([1,1,1])
 
 
 col_count_by_url.subheader("Динамика количества позиций")
-
-
-# fig = px.line(pivot_days.sort_values(by='dt_create'),
-#               x=pivot_days.sort_values(by='dt_create').dt_create.unique().tolist(),
-#               y=['count_cv_full_rec', "count_mon_full_rec",
-#                   'count_full_intersection'],
-#               title='',
-#               labels=None,
-#               color_discrete_sequence=px.colors.qualitative.Set2,
-#               height=300)
-
-# fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
-# fig.update_xaxes(type='category', fixedrange=False,
-#                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
-# fig.update_traces(
-#     mode="markers+lines", 
-#     hovertemplate=None,
-#     textposition='top center',
-# )
-
-# fig.layout.plot_bgcolor = 'white'
-# fig.layout.paper_bgcolor = 'white'
-
-# fig.update_layout(
-
-#     hovermode="x unified", 
-#     hoverlabel=dict(
-#         namelength=-1,
-#         bordercolor="White"), 
-#     margin=dict(l=0, r=20, t=0, b=0),
-#     legend=dict(
-#         orientation="h",
-#         yanchor="bottom",
-#         y=1.02,
-#         xanchor="left",
-#         x=0,
-    
-#         title='',
-#         title_font_family="Verdana",
-        
-#         font=dict(
-#             family="Sans-serif",
-#             size=12,
-#             color="black"
-#         ),
-#     bordercolor="Black",
-#     borderwidth=None
-# )
-# )
-
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
-                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 30])
-# col_try.plotly_chart(fig, use_container_width=True)
+                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
 
-
-fig = px.bar(pivot_days.sort_values(by='dt_create'),
-             x=pivot_days.sort_values(
-                 by='dt_create').dt_create.unique().tolist(),
-             y=['count_mons', 'is_manual'],
-             title='',
-             labels=None,
-             color_discrete_sequence=[
-                 px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
-             height=300, 
-             text_auto=True)
-
-fig.update_yaxes(visible=True, showticklabels=True,
-                 title='', range=[0, 250000])
-fig.update_xaxes(type='category', fixedrange=False,
-                 showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
-fig.layout.plot_bgcolor = 'white'
-fig.layout.paper_bgcolor = 'white'
-fig.update_layout(
-    hovermode=None,
-    hoverlabel=dict(
-        namelength=-1,
-        bordercolor="White"),
-    margin=dict(l=0, r=20, t=20, b=0),
-    legend=dict(
-        orientation="h",
-        yanchor="bottom",
-        y=1.02,
-        xanchor="left",
-        x=0,
-        title='',
-        title_font_family="Verdana",
-        font=dict(
-            family="Sans-serif",
-            size=12,
-            color="black"
-        ),
-        bordercolor="Black",
-        borderwidth=None
-    )
-)
-
-
 col_count_mons.subheader("Количество мониторингов")
-col_count_mons.plotly_chart(fig, use_container_width=True)
+fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=['count_mons', 'is_manual'])
+col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
 col_try.subheader("Распознавание")
