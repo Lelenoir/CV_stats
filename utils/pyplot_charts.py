@@ -4,12 +4,18 @@ import pandas as pd
 
 
 def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90]):
-    fig = px.line(df,
+    if data_marks_type == "markers+lines+text":
+        fig = px.line(df,
               x=x,
               y=y,
               title='',
               height=300,
               text=y)
+    else: fig = px.line(df,
+              x=x,
+              y=y,
+              title='',
+              height=300)
     fig.update_yaxes(visible=True, showticklabels=True, title='', range=xrange, showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
     fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
