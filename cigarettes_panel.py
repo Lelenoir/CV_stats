@@ -117,11 +117,11 @@ pivot_days["recognition"] = (
     * 100
 )
 
-pivot_days = pivot_days[['dt_create', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
-pivot_days = pivot_days.sort_values(by='dt_create')
-pivot_days = pivot_days.round(2)
+pivot_days_show = pivot_days[['dt_create', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+pivot_days_show = pivot_days_show.sort_values(by='dt_create')
+pivot_days_show = pivot_days_show.round(2)
 
-pivot_days.index += 1
+pivot_days_show.index += 1
 
 
 st.title("Аналитика сигарет за март-апрель")
@@ -134,7 +134,7 @@ st.header("Общая статистика")
 
 
 st.dataframe(
-    pivot_days.style.format(
+    pivot_days_show.style.format(
         {
             "count_mon_full_rec": "{:.2f}",
             "count_cv_full_rec": "{:.2f}",
