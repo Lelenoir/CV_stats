@@ -328,14 +328,14 @@ diff_intersection = round(
     (
         in_monita[
                 in_monita.dt_create == choise_date.strftime("%m-%d")
-            ].count_full_inersection.mean()
+            ].count_full_intersection.mean()
             - in_monita[
                 in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
-            ].count_full_inersection.mean()
+            ].count_full_intersection.mean()
         )
         / in_monita[
             in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
-        ].count_full_inersection.mean() * 100,
+        ].count_full_intersection.mean() * 100,
     2,
 )
 
@@ -376,7 +376,7 @@ col4.metric(
     f"Количество пересечений, %",
     round(
         in_monita[
-                in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_inersection.mean(), 2),
+                in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_intersection.mean(), 2),
     f"{diff_intersection}%",
 )
 
