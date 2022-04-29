@@ -141,7 +141,7 @@ st.dataframe(
             "count_cv_full_rec": "{:.2f}",
             "count_full_intersection": "{:.2f}",
             "recognition": "{:.2f}",
-        }
+        }, width=700, height=768
     )
 )
 
