@@ -2,8 +2,10 @@ import plotly.express as px
 import pandas as pd
 
 
-with px.colors.qualitative as s:
-     c = [s.T10[1], s.T10[3], s.T10[6], s.Safe[0]]
+# with px.colors.qualitative as s:
+#      c = [s.T10[1], s.T10[3], s.T10[6], s.Safe[0]]
+
+c = [px.colors.qualitative.T10[1], px.colors.qualitative.T10[3], px.colors.qualitative.T10[6], px.colors.qualitative.Safe[0]]
 
 def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90]):
     if data_marks_type == "markers+lines+text":
