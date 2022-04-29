@@ -145,14 +145,12 @@ st.dataframe(
 
 dates = df.dt_create.unique().tolist()
 
-col_count_by_url, col_count_mons, col_try = st.columns([1,1,1])
+col_rec, col_count_by_url, col_count_mons,  = st.columns([1,1,1])
 
 
-
-
-col_try.subheader("Распознавание")
+col_rec.subheader("Распознавание")
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
-col_try.plotly_chart(fig, use_container_width=True)
+col_rec.plotly_chart(fig, use_container_width=True)
 
 
 
@@ -326,8 +324,22 @@ diff_recognition = round(
     * 100,
     2,
 )
+diff_intersection = round(
+    (
+        in_monita[
+                in_monita.dt_create == choise_date.strftime("%m-%d")
+            ].count_full_inersection.mean()
+            - in_monita[
+                in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+            ].count_full_inersection.mean()
+        )
+        / in_monita[
+            in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
+        ].count_full_inersection.mean() * 100,
+    2,
+)
 
-col1, col2, col3 = st.columns([1, 1, 1])
+col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
 col1.metric(
     f"Количество мониторингов",
     in_monita[
@@ -359,6 +371,13 @@ col3.metric(
         2,
     ),
     f"{diff_recognition}%",
+)
+col4.metric(
+    f"Количество пересечений, %",
+    round(
+        in_monita[
+                in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_inersection.mean(), 2),
+    f"{diff_intersection}%",
 )
 
 
