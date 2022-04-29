@@ -151,7 +151,7 @@ dates = df.dt_create.unique().tolist()
 col_rec, col_count_mons, col_count_by_url  = st.columns([1,1,1])
 
 
-col_rec.subheader("Распознавание")
+col_rec.caption("Распознавание")
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
 col_rec.plotly_chart(fig, use_container_width=True)
 
