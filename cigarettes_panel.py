@@ -148,10 +148,11 @@ dates = df.dt_create.unique().tolist()
 col_count_by_url, col_count_mons, col_try = st.columns([1,1,1])
 
 
-col_count_by_url.subheader("Динамика количества позиций")
-fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
-                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
-col_count_by_url.plotly_chart(fig, use_container_width=True)
+
+
+col_try.subheader("Распознавание")
+fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
+col_try.plotly_chart(fig, use_container_width=True)
 
 
 
@@ -160,9 +161,12 @@ fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=['count_mons', 'i
 col_count_mons.plotly_chart(fig, use_container_width=True)
 
 
-col_try.subheader("Распознавание")
-fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
-col_try.plotly_chart(fig, use_container_width=True)
+
+col_count_by_url.subheader("Динамика количества позиций")
+fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
+                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
+col_count_by_url.plotly_chart(fig, use_container_width=True)
+
 
 # DATE REF ELEMENTS
 
