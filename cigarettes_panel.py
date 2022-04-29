@@ -116,6 +116,8 @@ pivot_days["recognition"] = (
     / pivot_days["count_mons"]
     * 100
 )
+
+pivot_days = pivot_days[['dt_create', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 pivot_days = pivot_days.sort_values(by='dt_create')
 pivot_days = pivot_days.round(2)
 
@@ -240,6 +242,8 @@ pivot_sn_day["count_mon_full_rec"] = pivot_sn_day["count_mon_full_rec"].round(
 pivot_sn_day["count_full_intersection"] = pivot_sn_day["count_full_intersection"].round(
     decimals=2
 )
+pivot_sn_day = pivot_sn_day[['shop_network_name', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+
 pivot_sn_day.index += 1
 
 
