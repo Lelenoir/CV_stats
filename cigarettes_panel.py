@@ -161,7 +161,7 @@ col_count_mons.plotly_chart(fig, use_container_width=True)
 
 
 col_try.subheader("Распознавание")
-fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text")
+fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
 col_try.plotly_chart(fig, use_container_width=True)
 
 # DATE REF ELEMENTS
