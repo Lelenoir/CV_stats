@@ -7,7 +7,7 @@ import pandas as pd
 
 c = [px.colors.qualitative.T10[0], px.colors.qualitative.T10[3], px.colors.qualitative.T10[6], px.colors.qualitative.Safe[0]]
 
-def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90], tooltips='yes'):
+def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90], tooltips=True):
     if data_marks_type == "markers+lines+text":
         fig = px.line(df,
               x=x,
@@ -26,12 +26,19 @@ def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 9
     fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
 
-    fig.update_traces(
-    mode=data_marks_type, 
-    hovertemplate=None,
-    textposition='top center',
-    hoverinfo='skip'
-)
+    if tooltips:
+        fig.update_traces(
+        mode=data_marks_type, 
+        hovertemplate=None,
+        textposition='top center',
+    )
+    else:
+        fig.update_traces(
+        mode=data_marks_type, 
+        hovertemplate=None,
+        textposition='top center',
+        hoverinfo='skip'
+    )
     fig.layout.plot_bgcolor = 'white'
     fig.layout.paper_bgcolor = 'white'
 
@@ -70,8 +77,6 @@ def get_bar_chart(df, x, y):
              y=y,
              title='',
              labels=None,
-            #  color_discrete_sequence=[
-            #      px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
              height=300, 
              text_auto=True,
              color_discrete_sequence=c)
@@ -80,8 +85,10 @@ def get_bar_chart(df, x, y):
                  title='', range=[0, 250000])
     fig.update_xaxes(type='category', fixedrange=False,
                     showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(238, 238, 238)')
+    
     fig.layout.plot_bgcolor = 'white'
     fig.layout.paper_bgcolor = 'white'
+    
     fig.update_layout(
         hovermode=None,
         hoverlabel=dict(
