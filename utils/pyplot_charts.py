@@ -69,11 +69,11 @@ def get_bar_chart(df, x, y):
              y=y,
              title='',
              labels=None,
-             color_discrete_sequence=[
-                 px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
+            #  color_discrete_sequence=[
+            #      px.colors.qualitative.Vivid[2], px.colors.qualitative.Vivid[7]],
              height=300, 
              text_auto=True,
-             color=c)
+             color_discrete_sequence=c)
 
     fig.update_yaxes(visible=True, showticklabels=True,
                  title='', range=[0, 250000])
