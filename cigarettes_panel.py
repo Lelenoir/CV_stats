@@ -147,7 +147,7 @@ st.dataframe(
 
 dates = df.dt_create.unique().tolist()
 
-col_rec, col_count_by_url, col_count_mons,  = st.columns([1,1,1])
+col_rec, col_count_mons, col_count_by_url  = st.columns([1,1,1])
 
 
 col_rec.subheader("Распознавание")
