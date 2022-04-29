@@ -7,7 +7,7 @@ import pandas as pd
 
 c = [px.colors.qualitative.T10[0], px.colors.qualitative.T10[3], px.colors.qualitative.T10[6], px.colors.qualitative.Safe[0]]
 
-def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90]):
+def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 90], tooltips='yes'):
     if data_marks_type == "markers+lines+text":
         fig = px.line(df,
               x=x,
@@ -30,6 +30,7 @@ def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 9
     mode=data_marks_type, 
     hovertemplate=None,
     textposition='top center',
+    hoverinfo='skip'
 )
     fig.layout.plot_bgcolor = 'white'
     fig.layout.paper_bgcolor = 'white'
