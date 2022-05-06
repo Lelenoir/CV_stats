@@ -404,7 +404,7 @@ st.write(
 )
 
 
-col_pivot_sn, col_empty = st.columns([3, 1])
+col_pivot_sn, col_empty = st.columns([2, 1])
 
 col_pivot_sn.dataframe(
     pivot_sn_day.head(top_sn).style.format(
@@ -417,7 +417,7 @@ col_pivot_sn.dataframe(
     )
 )
 
-c = alt.Chart(col_pivot_sn).mark_circle().encode(
+c = alt.Chart(pivot_sn_day).mark_circle().encode(
      x='recognition', y='count_mons', size='count_mons', color='recognition', tooltip=['recognition', 'count_mons', 'shop_network_name'])
 
 col_empty.altair_chart(c, use_container_width=True)
