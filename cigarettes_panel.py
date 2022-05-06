@@ -37,6 +37,7 @@ def convert_df(df):
 
 # Подготовка данных
 
+
 df = pd.DataFrame()
 
 for i in sorted(os.listdir("./files/")):
@@ -122,7 +123,8 @@ pivot_days = pivot_days.round(2)
 
 pivot_days.index += 1
 
-pivot_days_show = pivot_days[['dt_create', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+pivot_days_show = pivot_days[['dt_create', 'url', 'count_mons',
+                              'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 
 
 st.title("Аналитика сигарет за март-апрель")
@@ -133,7 +135,7 @@ space(1)
 
 st.header("Общая статистика")
 
-col_df, col_scatter = st.columns([2,1])
+col_df, col_scatter = st.columns([2, 1])
 
 col_df.dataframe(
     pivot_days_show.style.format(
@@ -146,31 +148,30 @@ col_df.dataframe(
     )
 )
 
- 
-col_scatter.write("")
 
+col_scatter.write("")
 
 
 dates = df.dt_create.unique().tolist()
 
-col_rec, col_count_mons, col_count_by_url  = st.columns([1,1,1])
+col_rec, col_count_mons, col_count_by_url = st.columns([1, 1, 1])
 
 
 col_rec.caption("Распознавание")
-fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
+fig = pyplot_charts.get_line_chart(
+    pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
 col_rec.plotly_chart(fig, use_container_width=True)
 
 
-
 col_count_mons.subheader("Количество мониторингов")
-fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=['count_mons', 'is_manual'])
+fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=[
+                                  'count_mons', 'is_manual'])
 col_count_mons.plotly_chart(fig, use_container_width=True)
-
 
 
 col_count_by_url.subheader("Динамика количества позиций")
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
-                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
+                                                                 'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
 col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
@@ -186,7 +187,7 @@ choise_date = col_slider.slider(
     min_value=datetime.strptime("2022-" + sorted(dates)[1], "%Y-%m-%d"),
     max_value=datetime.strptime("2022-" + sorted(dates)[-1], "%Y-%m-%d"),
     format="MM-DD",
-    step=timedelta(days=7), 
+    step=timedelta(days=7),
     key='my_slider'
 )
 
@@ -236,7 +237,8 @@ pivot_sn_day["count_mon_full_rec"] = pivot_sn_day["count_mon_full_rec"].round(
 pivot_sn_day["count_full_intersection"] = pivot_sn_day["count_full_intersection"].round(
     decimals=2
 )
-pivot_sn_day = pivot_sn_day[['shop_network_name', 'url', 'count_mons', 'recognition', 'count_cv_full_rec', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+pivot_sn_day = pivot_sn_day[['shop_network_name', 'url', 'count_mons', 'recognition',
+                             'count_cv_full_rec', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 
 pivot_sn_day.index += 1
 
@@ -325,15 +327,17 @@ diff_recognition = round(
 diff_intersection = round(
     (
         in_monita[
-                in_monita.dt_create == choise_date.strftime("%m-%d")
-            ].count_full_intersection.mean()
-            - in_monita[
-                in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
-            ].count_full_intersection.mean()
-        )
-        / in_monita[
-            in_monita.dt_create == (choise_date - timedelta(days=7)).strftime("%m-%d")
-        ].count_full_intersection.mean() * 100,
+            in_monita.dt_create == choise_date.strftime("%m-%d")
+        ].count_full_intersection.mean()
+        - in_monita[
+            in_monita.dt_create == (
+                choise_date - timedelta(days=7)).strftime("%m-%d")
+        ].count_full_intersection.mean()
+    )
+    / in_monita[
+        in_monita.dt_create == (
+            choise_date - timedelta(days=7)).strftime("%m-%d")
+    ].count_full_intersection.mean() * 100,
     2,
 )
 
@@ -374,7 +378,7 @@ col4.metric(
     f"Количество пересечений, %",
     round(
         in_monita[
-                in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_intersection.mean(), 2),
+            in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_intersection.mean(), 2),
     f"{diff_intersection}%",
 )
 
@@ -418,7 +422,10 @@ col_pivot_sn.dataframe(
 )
 
 c = alt.Chart(pivot_sn_day).mark_circle().encode(
-     x='count_mons', y='recognition', size='count_mons', color='recognition', tooltip=['shop_network_name', 'count_mons', 'recognition'])
+    x='count_mons', y=alt.Y(
+        'recognition',
+        scale=alt.Scale(type="log")  # Here the scale is applied
+    ), size='count_mons', color='recognition', tooltip=['shop_network_name', 'count_mons', 'recognition'])
 
 col_empty.altair_chart(c, use_container_width=True)
 
@@ -462,22 +469,24 @@ col_share.write("")
 
 
 in_monita = in_monita.fillna(0)
-in_monita['count_mon_full_rec'] = in_monita['count_mon_full_rec'].astype('int64')
+in_monita['count_mon_full_rec'] = in_monita['count_mon_full_rec'].astype(
+    'int64')
 in_monita['count_cv_full_rec'] = in_monita['count_cv_full_rec'].astype('int64')
-in_monita['count_full_intersection'] = in_monita['count_full_intersection'].astype('int64')
+in_monita['count_full_intersection'] = in_monita['count_full_intersection'].astype(
+    'int64')
 in_monita['recognition'] = in_monita['recognition'].astype('int64')
 
 
 a = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
-     x='count_cv_full_rec', y='count_mon_full_rec', tooltip=['count_cv_full_rec', 'count_mon_full_rec'])
+    x='count_cv_full_rec', y='count_mon_full_rec', tooltip=['count_cv_full_rec', 'count_mon_full_rec'])
 
 c = alt.Chart(in_monita[(in_monita.shop_network_name == selected_sn) & (in_monita.dt_create == choise_date.strftime("%m-%d"))]).mark_circle().encode(
     #  x='count_cv_full_rec', y='count_mon_full_rec', size='recognition', color='recognition', tooltip=['count_cv_full_rec', 'count_mon_full_rec', 'recognition'])
-     x='count_full_intersection', y='count_mon_full_rec', tooltip=['count_full_intersection', 'count_mon_full_rec'])
+    x='count_full_intersection', y='count_mon_full_rec', tooltip=['count_full_intersection', 'count_mon_full_rec'])
 
 
-coll, coll2, coll3 = st.columns([1,1,1])
+coll, coll2, coll3 = st.columns([1, 1, 1])
 coll.altair_chart(a, use_container_width=True)
 coll2.write("")
 coll3.altair_chart(c, use_container_width=True)
