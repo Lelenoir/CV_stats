@@ -418,7 +418,7 @@ col_pivot_sn.dataframe(
 )
 
 c = alt.Chart(pivot_sn_day).mark_circle().encode(
-     x='recognition', y='count_mons', size='count_mons', color='recognition', tooltip=['recognition', 'count_mons', 'shop_network_name'])
+     x='count_mons', y='recognition', size='recognition', color='recognition', tooltip=['shop_network_name', 'count_mons', 'recognition'])
 
 col_empty.altair_chart(c, use_container_width=True)
 
