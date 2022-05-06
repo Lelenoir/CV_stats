@@ -408,7 +408,7 @@ st.write(
 )
 
 
-col_pivot_sn, col_empty = st.columns([3, 1])
+col_pivot_sn, col_empty = st.columns([4, 1])
 
 col_pivot_sn.dataframe(
     pivot_sn_day.head(top_sn).style.format(
