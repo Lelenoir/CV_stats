@@ -133,8 +133,9 @@ space(1)
 
 st.header("Общая статистика")
 
+col_df, col_scatter = st.columns([2,1])
 
-st.dataframe(
+col_df.dataframe(
     pivot_days_show.style.format(
         {
             "count_mon_full_rec": "{:.2f}",
@@ -144,6 +145,12 @@ st.dataframe(
         }
     )
 )
+
+c = alt.Chart(pivot_days_show).mark_circle().encode(
+     x='recognition', y='recognition', size='count_mons', color='count_mons', tooltip=['recognition', 'recognition', 'count_mons'])
+
+col_scatter.altair_chart(c, use_container_width=True)
+
 
 
 dates = df.dt_create.unique().tolist()
