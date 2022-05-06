@@ -146,10 +146,8 @@ col_df.dataframe(
     )
 )
 
-c = alt.Chart(pivot_days_show).mark_circle().encode(
-     x='recognition', y='recognition', size='count_mons', color='count_mons', tooltip=['recognition', 'recognition', 'count_mons'])
-
-col_scatter.altair_chart(c, use_container_width=True)
+ 
+col_scatter.write("")
 
 
 
@@ -229,18 +227,6 @@ pivot_sn_day["recognition"] = (
     / pivot_sn_day["count_mons"]
     * 100
 )
-pivot_sn_day = pivot_sn_day[
-    [
-        "shop_network_name",
-        "url",
-        "count_mons",
-        "recognition",
-        "count_cv_full_rec",
-        "count_mon_full_rec",
-        "count_full_intersection",
-        "empty_cv",
-    ]
-]
 pivot_sn_day["recognition"] = pivot_sn_day["recognition"].round(decimals=2)
 pivot_sn_day["count_cv_full_rec"] = pivot_sn_day["count_cv_full_rec"].round(
     decimals=2)
@@ -250,7 +236,7 @@ pivot_sn_day["count_mon_full_rec"] = pivot_sn_day["count_mon_full_rec"].round(
 pivot_sn_day["count_full_intersection"] = pivot_sn_day["count_full_intersection"].round(
     decimals=2
 )
-pivot_sn_day = pivot_sn_day[['shop_network_name', 'url', 'count_mons', 'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+pivot_sn_day = pivot_sn_day[['shop_network_name', 'url', 'count_mons', 'recognition', 'count_cv_full_rec', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 
 pivot_sn_day.index += 1
 
@@ -431,7 +417,12 @@ col_pivot_sn.dataframe(
     )
 )
 
-col_empty.write("")
+c = alt.Chart(col_pivot_sn).mark_circle().encode(
+     x='recognition', y='count_mons', size='count_mons', color='recognition', tooltip=['recognition', 'count_mons', 'shop_network_name'])
+
+col_empty.altair_chart(c, use_container_width=True)
+
+# col_empty.write("")
 
 
 space(1)
