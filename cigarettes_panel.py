@@ -126,38 +126,29 @@ pivot_days.index += 1
 pivot_days_show = pivot_days[['dt_create', 'url', 'count_mons',
                               'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 
+list_days = sorted(pivot_days.dt_create.tolist())
+period = list_days[0][-2:]+'.'+list_days[0][:2]+'-'+list_days[-1][-2:]+'.'+list_days[-1][:2]
 
-st.title("Аналитика сигарет за март-апрель")
+
+st.title(f"Аналитика сигарет за период {period}")
 
 
 space(1)
 
 
-st.header("Общая статистика")
+st.header(f"Общая статистика с {list_days[0]}")
 
-col_df, col_scatter = st.columns([2, 1])
-
-col_df.dataframe(
-    pivot_days_show.style.format(
-        {
-            "count_mon_full_rec": "{:.2f}",
-            "count_cv_full_rec": "{:.2f}",
-            "count_full_intersection": "{:.2f}",
-            "recognition": "{:.2f}",
-        }
-    )
-)
-
+col_total_stats_m1, col_total_stats_m2, col_total_stats_m3, col_total_stats_m4 = st.columns([2, 1])
 
 col_scatter.write("")
 
 
 dates = df.dt_create.unique().tolist()
 
-col_rec, col_count_mons, col_count_by_url = st.columns([1, 1, 1])
+col_rec, col_count_mons, col_count_by_url = st.columns([1, 1])
 
 
-col_rec.caption("Распознавание")
+col_rec.subheader("Распознавание")
 fig = pyplot_charts.get_line_chart(
     pivot_days, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
 col_rec.plotly_chart(fig, use_container_width=True)
