@@ -140,7 +140,7 @@ st.header(f"Общая статистика с {list_days[0]}")
 
 col_total_stats_m1, col_total_stats_m2, col_total_stats_m3, col_total_stats_m4 = st.columns([1, 1, 1, 1])
 
-col_scatter.write("")
+col_total_stats_m1.write("")
 
 
 dates = df.dt_create.unique().tolist()
