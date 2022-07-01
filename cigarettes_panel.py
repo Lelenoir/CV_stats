@@ -145,7 +145,7 @@ col_total_stats_m1.write("")
 
 dates = df.dt_create.unique().tolist()
 
-col_rec, col_count_mons, col_count_by_url = st.columns([1, 1])
+col_rec, col_count_mons, col_count_by_url = st.columns([1, 1, 1])
 
 
 col_rec.subheader("Распознавание")
