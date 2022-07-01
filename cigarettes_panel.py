@@ -366,7 +366,7 @@ col3.metric(
     f"{diff_recognition}%",
 )
 col4.metric(
-    f"Количество пересечений, %",
+    f"Количество пересечений",
     round(
         in_monita[
             in_monita.dt_create == choise_date.strftime("%m-%d")].count_full_intersection.mean(), 2),
@@ -412,12 +412,7 @@ col_pivot_sn.dataframe(
     )
 )
 
-c = alt.Chart(pivot_sn_day.iloc[3:,:]).mark_circle().encode(
-    x='count_mons', y='recognition', size='count_mons', tooltip=['shop_network_name', 'count_mons', 'recognition'])
-
-col_empty.altair_chart(c, use_container_width=True)
-
-# col_empty.write("")
+col_empty.write("")
 
 
 space(1)
