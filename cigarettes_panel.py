@@ -112,6 +112,8 @@ pivot_days = (
     .sort_values(by="count_mons", ascending=False)
 ).reset_index(drop=True)
 
+pivot_days['not_manual'] = pivot_days["count_mons"] - pivot_days["is_manual"]
+
 pivot_days["recognition"] = (
     (pivot_days["count_mons"] - pivot_days["is_manual"])
     / pivot_days["count_mons"]
@@ -156,7 +158,7 @@ col_rec.plotly_chart(fig, use_container_width=True)
 
 col_count_mons.subheader("Количество мониторингов")
 fig = pyplot_charts.get_bar_chart(pivot_days, x='dt_create', y=[
-                                  'count_mons', 'is_manual'])
+                                  'not_manual', 'is_manual'])
 col_count_mons.plotly_chart(fig, use_container_width=True)
 
 
@@ -164,6 +166,11 @@ col_count_by_url.subheader("Динамика количества позиций
 fig = pyplot_charts.get_line_chart(pivot_days, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
                                                                  'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
 col_count_by_url.plotly_chart(fig, use_container_width=True)
+
+
+
+st.header(f"Статистика по конкуренту {list_days[0]}")
+
 
 
 # DATE REF ELEMENTS
