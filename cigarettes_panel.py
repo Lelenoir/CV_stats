@@ -243,7 +243,7 @@ col_comp_rec, col_comp_count_mons, col_comp_count_by_url = st.columns([1, 1, 1])
 
 col_comp_rec.subheader("Распознавание")
 fig = pyplot_charts.get_line_chart(
-    pivot_comp_days_choise, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False, xrange='')
+    pivot_comp_days_choise, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False, xrange=[50, 100])
 col_comp_rec.plotly_chart(fig, use_container_width=True)
 
 
