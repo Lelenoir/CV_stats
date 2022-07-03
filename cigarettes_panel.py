@@ -243,13 +243,12 @@ col_comp_rec, col_comp_count_mons, col_comp_count_by_url = st.columns([1, 1, 1])
 
 col_comp_rec.subheader("Распознавание")
 fig = pyplot_charts.get_line_chart(
-    pivot_comp_days_choise, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
+    pivot_comp_days_choise, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False, xrange='')
 col_comp_rec.plotly_chart(fig, use_container_width=True)
 
 
 col_comp_count_mons.subheader("Количество мониторингов")
-fig = pyplot_charts.get_bar_chart(pivot_comp_days_choise, x='dt_create', y=[
-                                  'not_manual', 'is_manual'])
+fig = pyplot_charts.get_bar_chart(pivot_comp_days_choise, x='dt_create', y=['not_manual', 'is_manual'])
 col_comp_count_mons.plotly_chart(fig, use_container_width=True)
 
 
