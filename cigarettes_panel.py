@@ -255,7 +255,7 @@ col_comp_count_mons.plotly_chart(fig, use_container_width=True)
 
 col_comp_count_by_url.subheader("Динамика количества позиций")
 fig = pyplot_charts.get_line_chart(pivot_comp_days_choise, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
-                                                                 'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
+                                                                 'count_full_intersection'], data_marks_type="markers+lines", xrange='')
 col_comp_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
