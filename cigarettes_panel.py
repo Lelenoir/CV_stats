@@ -128,6 +128,57 @@ pivot_days.index += 1
 pivot_days_show = pivot_days[['dt_create', 'url', 'count_mons',
                               'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
 
+
+
+
+
+pivot_comp_days = (
+    in_monita.pivot_table(
+        index=["shop_network_name", "dt_create"],
+        values=[
+            "url",
+            "count_mons",
+            "empty_cv",
+            "is_manual",
+            "count_mon_full_rec",
+            "count_cv_full_rec",
+            "count_full_intersection",
+        ],
+        aggfunc={
+            "url": pd.Series.nunique,
+            "count_mons": np.sum,
+            "is_manual": np.sum,
+            "count_mon_full_rec": np.mean,
+            "count_cv_full_rec": np.mean,
+            "count_full_intersection": np.mean,
+            "empty_cv": np.sum,
+        },
+        fill_value=0,
+    )
+    .reset_index()
+    .sort_values(by="count_mons", ascending=False)
+).reset_index(drop=True)
+
+pivot_comp_days['not_manual'] = pivot_comp_days["count_mons"] - pivot_comp_days["is_manual"]
+
+pivot_comp_days["recognition"] = (
+    (pivot_comp_days["count_mons"] - pivot_comp_days["is_manual"])
+    / pivot_comp_days["count_mons"]
+    * 100
+)
+
+pivot_comp_days = pivot_comp_days.sort_values(by='dt_create')
+pivot_comp_days = pivot_comp_days.round(2)
+
+pivot_comp_days.index += 1
+
+pivot_comp_days_show = pivot_comp_days[["shop_network_name", 'dt_create', 'url', 'count_mons',
+                              'recognition', 'count_mon_full_rec', 'count_full_intersection', 'empty_cv']]
+
+
+
+
+
 list_days = sorted(pivot_days.dt_create.tolist())
 period = list_days[0][-2:]+'.'+list_days[0][:2]+'-'+list_days[-1][-2:]+'.'+list_days[-1][:2]
 
@@ -169,7 +220,47 @@ col_count_by_url.plotly_chart(fig, use_container_width=True)
 
 
 
-st.header(f"Статистика по конкуренту {list_days[0]}")
+
+
+
+
+
+st.header(f"Статистика по конкуренту за весь период")
+
+col_comp_ever, col_comp_ever_2 = st.columns([2, 3])
+
+selected_sn = col_comp_ever.selectbox(
+    "Выберите конкурента",
+    options=df.shop_network_name.unique().tolist(),
+    index=0,
+    key='my_selectbox'
+)
+
+pivot_comp_days_choise = pivot_comp_days[pivot_comp_days.shop_network_name == selected_sn].iloc[:,1:]
+
+col_comp_rec, col_comp_count_mons, col_comp_count_by_url = st.columns([1, 1, 1])
+
+
+col_comp_rec.subheader("Распознавание")
+fig = pyplot_charts.get_line_chart(
+    pivot_comp_days_choise, x='dt_create', y='recognition', data_marks_type="markers+lines+text", tooltips=False)
+col_comp_rec.plotly_chart(fig, use_container_width=True)
+
+
+col_comp_count_mons.subheader("Количество мониторингов")
+fig = pyplot_charts.get_bar_chart(pivot_comp_days_choise, x='dt_create', y=[
+                                  'not_manual', 'is_manual'])
+col_comp_count_mons.plotly_chart(fig, use_container_width=True)
+
+
+col_comp_count_by_url.subheader("Динамика количества позиций")
+fig = pyplot_charts.get_line_chart(pivot_comp_days_choise, x='dt_create', y=['count_cv_full_rec', "count_mon_full_rec",
+                                                                 'count_full_intersection'], data_marks_type="markers+lines", xrange=[10, 25])
+col_comp_count_by_url.plotly_chart(fig, use_container_width=True)
+
+
+
+
 
 
 
