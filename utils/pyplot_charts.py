@@ -15,14 +15,20 @@ def get_line_chart(df, x, y, data_marks_type="markers+lines+text", xrange=[70, 9
               title='',
               height=300,
               text=y,
-              color_discrete_sequence=c)
+              color_discrete_sequence=c,
+              opacity=0.5)
     else: fig = px.line(df,
               x=x,
               y=y,
               title='',
               height=300,
-              color_discrete_sequence=c)
-    fig.update_yaxes(visible=True, showticklabels=True, title='', range=xrange, showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
+              color_discrete_sequence=c,
+              opacity=0.5)
+    
+    if xrange == '':
+        fig.update_yaxes(visible=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
+    else:
+        fig.update_yaxes(visible=True, showticklabels=True, title='', range=xrange, showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
     fig.update_xaxes(type='category', fixedrange=False,
                  showspikes=True, showticklabels=True, title='', showgrid=True, gridwidth=1, gridcolor='rgb(244, 244, 244)')
 
